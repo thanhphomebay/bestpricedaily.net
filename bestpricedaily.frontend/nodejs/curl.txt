@@ -1,0 +1,70 @@
+1. Get Access Token
+curl https://api.sandbox.paypal.com/v1/oauth2/token \
+  -H "Accept: application/json" \
+  -H "Accept-Language: en_US" \
+  -u "Adnsg0_K5umJLQExpkP32Af3AS7pq7r24xUnXYzB4_3NaN9ROtFGqtIAl-qV5krxBZegrbIYCXwk6wEi:EGSP72d9MJ1cDIXhP5ZGKp2OUBMQuImEDmbyfI1dUmIFPfd0zBwp5ThXSxKVQwQItJGn8B2JOY6Zj743" \
+  -d "grant_type=client_credentials"
+
+
+2. Create order
+curl -v -X POST https://api.sandbox.paypal.com/v2/checkout/orders \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer Access-Token" \
+-d '{
+  "intent": "CAPTURE",
+  "purchase_units": [
+    {
+      "amount": {
+        "currency_code": "USD",
+        "value": "100.00"
+      }
+    }
+  ]
+}'
+
+
+3. Capture payment
+curl -v -X POST https://api.sandbox.paypal.com/v2/checkout/orders/5O190127TN364715T/capture \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer Access-Token" \
+-H "PayPal-Request-Id: 7b92603e-77ed-4896-8e78-5dea2050476a"
+
+
+
+--------------------------------------------------------------------------
+
+curl -v -X POST https://api.sandbox.paypal.com/v2/checkout/orders \
+-H "Content-Type: application/json" \
+-d '{
+		intent: "capture",
+                purchase_units: [
+                {
+                  invoice_id: 'bestpricedaily.net' + uuidv4(),
+                  amount: {
+                    currency_code: 'USD',
+                    value: 7,
+                    breakdown: {
+                      item_total: { value: 7, currency_code: 'USD' }
+                    }
+                  },
+                  items: [{
+                    name: 'Hafer',
+                    unit_amount: { value: '3', currency_code: 'USD' },
+                    quantity: '1',
+                    sku: 'haf001'
+                  }, {
+                    name: 'Discount',
+                    unit_amount: { value: '4', currency_code: 'USD' },
+                    quantity: '1',
+                    sku: 'dsc002'
+                  }]
+                }
+              ]
+}'
+
+
+-------------------------------------------
+order details
+curl -v -X GET https://api.sandbox.paypal.com/v2/checkout/orders/85974963MP532121B \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer A21AAGhRdBwo1ZPvQe_fw5dDt5APYWyIxOCRHF_3EZlQG5eSU3jJ_ZwpiPRI_fPX5hvehGVx07RhTHo2Wni68zKKwK3Afti_Q"

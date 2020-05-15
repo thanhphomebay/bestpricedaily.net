@@ -1,0 +1,13 @@
+.cartheader {
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    /* font-size: medium; */
+    font-weight: bolder;
+}
+.money {
+    text-align: right;
+}
+.cartbutton {
+    display:block; width:95%; margin-top:10px; margin-left: 10px; background-color:r
+}

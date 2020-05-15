@@ -1,0 +1,42 @@
+<!-- 
+<div fxLayout="row wrap" fxLayoutGap="25px" >
+    <ng-container *ngFor="let item of items|async">
+        <mat-card>
+            <img mat-card-image src={{item.pix}}>
+            <mat-card-content></mat-card-content>
+            <mat-card-footer>{{item.name}} Price: {{item.price|currency}}</mat-card-footer>
+            <mat-card-actions align="start">
+                <button mat-button (click)="addItem(item)"> <mat-icon>add_shopping_cart</mat-icon>Add to cart</button>
+                <button mat-button (click)="delItem(item)"> <mat-icon>add_shopping_cart</mat-icon>Add to cart</button>
+                <button mat-button>{{item.idx}}</button>
+            </mat-card-actions>
+        </mat-card>
+    </ng-container>
+</div>
+ -->
+<div fxLayoutAlign="center">
+    <div fxLayout="row wrap" fxLayout.xs="column">
+        <ng-container *ngFor="let item of items">
+            <div class="item shadow">
+                <div>
+                    <a [routerLink]="['detail/',item.id]">
+                        <img class="itemimg shadow" src={{item.pix}}>
+                    </a>
+                </div>
+                <div class="itemname">
+                    {{item.name}}
+                </div>
+                <!-- <div class="itemdesc">
+                    {{item.desc}}
+                </div> -->
+                <hr style="width:90%;">
+                <div fxLayout="row" fxLayoutAlign="space-between center">
+                    <div class="itemprice">{{item.price | currency}}</div>
+                    <button mat-button matTooltip="Add the item" color="primary" (click)="addItem(item)">
+                        <mat-icon>add_shopping_cart</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>

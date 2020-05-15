@@ -1,0 +1,35 @@
+/* You can add global styles to this file, and also import other style files */
+/* removed this because it mess up with sticky toolbar, scroll down more than half and toolbar disappear
+html, body { height: 100%; }
+*/
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.shadow {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  .item {
+    margin: 10px;
+    width: 330px;
+    max-width: 330;
+  }
+  .itemdesc {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  .itemname {
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    font-size: medium;
+    font-weight: bolder;
+    color: blue;
+  }
+  .itemimg {
+    width: 100%;
+  }
+  .itemprice {
+    margin-left: 20px;
+    font-weight: bold;
+  }
+  
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

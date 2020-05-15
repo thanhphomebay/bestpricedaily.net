@@ -1,0 +1,102 @@
+<!--
+<mat-card>
+    <mat-card *ngFor="let item of items$|async">
+        <mat-card-title>{{item.name}}</mat-card-title>
+        <img src="{{item.pix}}">
+    </mat-card>
+</mat-card>
+-->
+
+<!-- <div *ngIf="!paidFor"> -->
+<h1>{{greeting}}</h1> 
+<ng-container *ngIf="(cartItems$|async)?.length then showCart ;else showEmptyCart"></ng-container>
+<ng-template #showCart>
+    <div fxLayout="row" fxLayout.xs="column" *ngIf="cartItems$|async as items">
+        <div class="shadow" style="min-width: 350px;max-width: 350px;">
+            <div class="cartheader">Your shopping cart</div>
+            <hr>
+
+            <table style="width:100%;padding-left: 5px;padding-right: 5px;">
+                <tr *ngFor="let item of items">
+                    <td style="width: 300px;">{{item.quantity}} X {{item.name}}</td>
+                    <td class="money">{{item.price|currency}}</td>
+                </tr>
+            </table>
+
+            <hr style="width:90%">
+            <div fxLayoutAlign="space-between" style="margin-top:5px;">
+                <div style="padding-left:5px;">Sub Total</div>
+                <div style="padding-right: 6px;">{{calSubtotal(items)|currency}}</div>
+            </div>
+            <div fxLayoutAlign="space-between">
+                <div style="padding-left:5px;">Shipping</div>
+                <div style="padding-right: 6px;">{{shippingCost|currency}}</div>
+            </div>
+            <div fxLayoutAlign="space-between">
+                <div style="padding-left:5px;">Tax</div>
+                <div style="padding-right: 6px;">{{calTax(items)|currency}}</div>
+            </div>
+            <hr style="width:90%">
+            <div fxLayoutAlign="space-between">
+                <div style="font-weight: bolder;padding-left:5px;">Total</div>
+                <div style="font-weight: bolder;padding-right: 6px;" class="money">{{calTotal(items) | currency}}
+                </div>
+            </div>
+            <hr>
+            <!-- <app-paypal [items]="items"></app-paypal> -->
+            <!-- <div #paypalcheckout style="width:350px; size: 'small'"></div> -->
+            <!-- <button mat-raised-button class="cartbutton" (click)="checkoutWithPaypal(items)">Checkout with Paypal</button> -->
+            <button mat-raised-button class="cartbutton" (click)="checkoutWithPaypal()">Checkout with Paypal</button>
+            <button mat-raised-button routerLink="/items" class="cartbutton"> Continue Shopping </button>
+        </div>
+        <div fxLayout="row wrap" fxLayout.xs="column">
+            <ng-container *ngFor="let item of items">
+                <div class="item shadow">
+                    <div>
+                        <a [routerLink]="['/items/detail/',item.id]">
+                            <img class="itemimg shadow" src={{item.pix}}>
+                        </a>
+                    </div>
+                    <div class="itemname">
+                        {{item.name}} {{item.idx}}
+                    </div>
+                    <!-- <div class="itemdesc">
+                        {{item.desc}}
+                    </div> -->
+                    <hr style="width:90%;">
+                    <div fxLayout="row" fxLayoutAlign="space-between center">
+                        <div class="itemprice">{{item.price | currency}}</div>
+                        <!-- <button mat-button color="primary" (click)="removeItem(item.idx)">
+                            <mat-icon>remove_shopping_cart</mat-icon>
+                        </button> -->
+                        <div>
+                            <button mat-button color="primary" (click)="removeItem(item)">
+                                <mat-icon>remove_circle_outline</mat-icon>
+                            </button>
+                            <span>{{item.quantity}}</span>
+                            <button mat-button color="primary" (click)="addItem(item)">
+                                <mat-icon>add_circle_outline</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #showEmptyCart>
+    <!-- <div class="shadow" style="text-align: center;margin-top:40px; width:51%"> -->
+    <div class="shadow" fxLayout="column" style="min-width: 350px;max-width: 350px; margin:auto">
+        <div class="cartheader">Your shopping cart is empty</div>
+        <hr style="width:90%">
+        <button mat-raised-button routerLink="/items" class="cartbutton">
+            Back to Shopping
+        </button>
+        <!-- <button [disabled]="!(getCartCount$|async)?.length" mat-raised-button routerLink="/checkout" class="cartbutton">
+            Checkout
+        </button> -->
+    </div>
+</ng-template>
+<!-- </div> -->
+<!-- <div *ngIf="paidFor"> <app-receipt></app-receipt> </div> -->

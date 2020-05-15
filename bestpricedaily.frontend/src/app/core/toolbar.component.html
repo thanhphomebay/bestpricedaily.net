@@ -1,0 +1,23 @@
+<mat-toolbar color="primary">
+    <div fxHide.gt-sm="true">
+        <button mat-icon-button [matMenuTriggerFor]="appMenu">
+            <mat-icon>menu</mat-icon>
+            <mat-menu #appMenu="matMenu">
+                <button mat-menu-item>Login</button>
+                <button mat-menu-item routerLink="contact">Contact</button>
+            </mat-menu>
+        </button>
+        <a mat-button href="items">BestPriceDaily</a>
+    </div>
+    <div fxHide.lt-md="true">
+        <a mat-button href="items">BestPriceDaily</a>
+        <!-- <button mat-button routerLink="items">Shopping</button> -->
+        <button mat-button>Login</button>
+        <button mat-button routerLink="contact">Contact</button>
+    </div>
+    <div>
+        <button mat-button routerLink="cart" [disabled]="!(total$ | async) ">
+            <mat-icon>shopping_cart</mat-icon><span *ngIf="total$|async as total">{{total}}</span>
+        </button>
+    </div>
+</mat-toolbar>

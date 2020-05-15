@@ -1,0 +1,26 @@
+<div fxLayoutAlign="center center" *ngIf=" item$|async as item">
+    <div fxLayout="row" fxLayout.xs="column" class="itemdetail" fxLayoutAlign="space-between">
+        <div style="min-width:380px; max-width:380px;">
+            <img class="itemimg shadow" src="{{item.pix}}">
+            <hr width="90%">
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+                <div class="itemprice">{{item.price | currency}}</div>
+                <button mat-button matTooltip="Add the item" color="primary" (click)="addItem(item)">
+                    <mat-icon>add_shopping_cart</mat-icon>
+                </button>
+            </div>
+            <button routerLink="/items" mat-stroked-button style="width:100%;" mat-primary>
+                Back To Shopping
+            </button>
+            <button *ngIf="cartCount$|async" routerLink="/cart" mat-stroked-button style="width:100%;" mat-primary>
+                Shopping Cart
+            </button>
+        </div>
+        <div class="itemdetaildesc">
+            <div>
+                <div class="itemname">{{item.name}}</div>
+                <div> {{item.des}}</div>
+            </div>
+        </div>
+    </div>
+</div>
