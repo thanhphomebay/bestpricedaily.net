@@ -32,11 +32,20 @@ namespace bestpricedaily
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-                       services.Configure<MyStoreSetting>(Configuration.GetSection(nameof(MyStoreSetting)));
+            services.Configure<MyStoreSetting>(Configuration.GetSection(nameof(MyStoreSetting)));
             services.AddDbContext<DataDbContext>(opts => opts.UseMySql(Configuration.GetConnectionString("MysqlConnection")));
             services.AddScoped<DataDbContext>();
             services.AddScoped(typeof(IAsyncRepository<>), typeof(EfRepository<>));
             services.AddAutoMapper(typeof(Startup));
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                    builder =>
+                    {
+                        builder.WithOrigins("http://example.com",
+                                            "http://www.contoso.com");
+                    });
+            });
             services.AddControllers().AddNewtonsoftJson();
             services.AddHttpClient();
         }

@@ -20,10 +20,10 @@ namespace bestpricedaily.Controllers
             _orderRepo = orderRepo;
         }
         // GET: api/Orders
-        [HttpGet]
-        public async Task<IEnumerable<Order>> Get()
-        {
-            return await _orderRepo.GetAll();
-        }
+        // [HttpGet]
+        // public async Task<IEnumerable<Order>> Get()
+        // {
+        //     return await _orderRepo.GetAll();
+        // }
     }
 }

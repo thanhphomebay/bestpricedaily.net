@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-contact',
@@ -14,8 +15,8 @@ export class ContactComponent implements OnInit {
   formGroup: FormGroup;
   titleAlert: string = 'This field is required';
   post: any = '';
-
-  constructor(private formBuilder: FormBuilder) { }
+  baseUrl : string;
+  constructor(@Inject('BASE_URL') baseUrl: string, private formBuilder: FormBuilder, private httpClient : HttpClient) { this.baseUrl = baseUrl }
 
   ngOnInit() {
     this.createForm();
@@ -75,6 +76,20 @@ export class ContactComponent implements OnInit {
   }
 
   onSubmit(post) {
-    this.post = post;
+
+    let headers = new HttpHeaders();
+
+    headers = headers.set('Accept', 'application/json');
+
+    if (post) {
+      headers = headers.set('Content-Type', 'application/json');
+    }
+
+    this.httpClient.post(this.baseUrl  + `api/contact`, post, {
+      headers
+    }).subscribe(result => {
+      console.log("Email sent!");
+    });
+
   }
 }
