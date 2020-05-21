@@ -16,7 +16,7 @@ using bestpricedaily.Hubs;
 //using tst.Misc.Repository;
 using bestpricedaily.Paypal;
 using bestpricedaily.Models;
-using bestpricedaily.Misc.Repository;
+using Core.Repository;
 using Microsoft.Extensions.Options;
 using bestpricedaily;
 
@@ -41,16 +41,6 @@ namespace bestpricedaily.Controllers
             _clientFactory = client;
             _configRoot = configRoot.Value;
             _itemRepo = itemRepo;
-        }
-
-        [HttpGet]
-        public async Task<string> Get()
-        {
-
-            //await  _hub.Clients. Invoke("SendMessage", "From backend server, done with paypal capture payment");
-            // await _hub.Clients.All.SendAsync("cartcomponent", "From backend server, done with paypal capture payment");
-            return "Get method";
-
         }
 
         // POST: api/CreateOrder

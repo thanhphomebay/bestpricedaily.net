@@ -17,7 +17,7 @@ using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using QuickType;
 using bestpricedaily.Hubs;
-using bestpricedaily.Misc.Repository;
+using Core.Repository;
 using bestpricedaily.Models;
 using bestpricedaily.Paypal;
 using Microsoft.Extensions.Logging;

@@ -16,7 +16,7 @@ using bestpricedaily.Hubs;
 //using tst.Misc.Repository;
 using bestpricedaily.Paypal;
 using bestpricedaily.Models;
-using bestpricedaily.Misc.Repository;
+using Core.Repository;
 using Microsoft.Extensions.Options;
 using bestpricedaily.ViewModels;
 using Microsoft.Extensions.Logging;

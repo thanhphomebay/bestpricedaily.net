@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using bestpricedaily.Models;
 
-namespace bestpricedaily.Misc.Repository
+namespace Core.Repository
 {
     public interface IEntity
     {
@@ -44,13 +44,13 @@ namespace bestpricedaily.Misc.Repository
 
         #region Fields
 
-        protected readonly DataDbContext _ctx;
+        protected readonly BestPriceDailyDbContext _ctx;
         //private DbSet<T> entities;
         string errMsg = string.Empty;
 
         #endregion
 
-        public EfRepository(DataDbContext context)
+        public EfRepository(BestPriceDailyDbContext context)
         {
             _ctx = context;
             //entities = context.Set<T>();
@@ -102,13 +102,6 @@ namespace bestpricedaily.Misc.Repository
 
         #endregion
 
-    }
-    public class DataDbContext : DbContext
-    {
-        public DbSet<Item> Items { get; set; }
-        public DbSet<Order> Orders { get; set; }
-
-        public DataDbContext(DbContextOptions<DataDbContext> options) : base(options)        { }
     }
 
 

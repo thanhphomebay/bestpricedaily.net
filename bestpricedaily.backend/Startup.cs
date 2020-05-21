@@ -15,8 +15,11 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using bestpricedaily.Hubs;
-using bestpricedaily.Misc.Repository;
+using Core.Repository;
+using bestpricedaily.Models;
 using Newtonsoft;
+using Core.GlobalErrorHandling.Extensions;
+
 
 namespace bestpricedaily
 {
@@ -24,6 +27,7 @@ namespace bestpricedaily
     {
         public Startup(IConfiguration configuration)
         {
+            // LoggerManager.LoadConfiguration(String.Concat(Directory.GetCurrentDirectory(), "/nlog.config");
             Configuration = configuration;
         }
 
@@ -33,31 +37,23 @@ namespace bestpricedaily
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<MyStoreSetting>(Configuration.GetSection(nameof(MyStoreSetting)));
-            services.AddDbContext<DataDbContext>(opts => opts.UseMySql(Configuration.GetConnectionString("MysqlConnection")));
-            services.AddScoped<DataDbContext>();
+            services.AddDbContext<BestPriceDailyDbContext>(opts => opts.UseMySql(Configuration.GetConnectionString("MysqlConnection")));
+            services.AddScoped<BestPriceDailyDbContext>();
             services.AddScoped(typeof(IAsyncRepository<>), typeof(EfRepository<>));
             services.AddAutoMapper(typeof(Startup));
-            services.AddCors(options =>
-            {
-                options.AddDefaultPolicy(
-                    builder =>
-                    {
-                        builder.WithOrigins("http://example.com",
-                                            "http://www.contoso.com");
-                    });
-            });
             services.AddControllers().AddNewtonsoftJson();
             services.AddHttpClient();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
+            app.ConfigureExceptionHandler(logger);
             // app.UseHttpsRedirection();
 
             app.UseRouting();

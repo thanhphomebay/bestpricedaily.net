@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Linq;
 using bestpricedaily.Models;
-
+using Core.Repository;
 namespace bestpricedaily.Misc
 {
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.DependencyInjection;
-    using Repository;
     
     public class DbInit
     {
         public static void Initialize(IServiceProvider serviceProvider)
         {
-            using (var context = new DataDbContext(
-                serviceProvider.GetRequiredService<DbContextOptions<DataDbContext>>()))
+            using (var context = new BestPriceDailyDbContext(
+                serviceProvider.GetRequiredService<DbContextOptions<BestPriceDailyDbContext>>()))
             {
                 // Look for any board games.
                 if (context.Items.Any())

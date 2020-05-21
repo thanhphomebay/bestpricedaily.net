@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using bestpricedaily.Misc.Repository;
+using Core.Repository;
 namespace bestpricedaily.Models
 {
     public class Item : BaseEntity

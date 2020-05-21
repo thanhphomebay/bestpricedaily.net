@@ -6,6 +6,7 @@ using bestpricedaily.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using Core.ApiErrors;
 
 namespace bestpricedaily.Controllers
 {
@@ -20,9 +21,12 @@ namespace bestpricedaily.Controllers
         }
         // GET: api/MyAppSetting
         [HttpGet]
-        public MyStoreSettingView Get()
+        public IActionResult Get()
         {
-            return new MyStoreSettingView { tax_rate= _settings.Tax, shipping_base_rate = _settings.Shipping };
+            if (_settings != null)
+                return Ok(new MyStoreSettingView { tax_rate = _settings.Tax, shipping_base_rate = _settings.Shipping });
+            else
+                return NotFound(new ApiError(404,"Store settings not found"));
         }
     }
 }

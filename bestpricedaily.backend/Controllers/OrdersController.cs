@@ -5,8 +5,9 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using bestpricedaily.Misc.Repository;
+using Core.Repository;
 using bestpricedaily.Models;
+using Core.ApiErrors;
 
 namespace bestpricedaily.Controllers
 {
@@ -20,10 +21,14 @@ namespace bestpricedaily.Controllers
             _orderRepo = orderRepo;
         }
         // GET: api/Orders
-        // [HttpGet]
-        // public async Task<IEnumerable<Order>> Get()
-        // {
-        //     return await _orderRepo.GetAll();
-        // }
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            var orders = await _orderRepo.GetAll();
+            if (orders != null)
+                return Ok(orders);
+            else
+                return NotFound(new ApiError(404,"Orders are empty"));
+        }
     }
 }

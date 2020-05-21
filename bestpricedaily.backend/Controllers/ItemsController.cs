@@ -5,9 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using bestpricedaily.Models;
-using bestpricedaily.Misc.Repository;
+using Core.Repository;
 using AutoMapper;
 using bestpricedaily.ViewModels;
+using Core.ApiErrors;
 
 namespace bestpricedaily.Controllers
 {
@@ -17,45 +18,35 @@ namespace bestpricedaily.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IAsyncRepository<Item> _itemRepo;
-        public ItemsController(IMapper mapper, IAsyncRepository<Item> itemRepo) 
+        public ItemsController(IMapper mapper, IAsyncRepository<Item> itemRepo)
         {
             _mapper = mapper;
-            _itemRepo = itemRepo; 
+            _itemRepo = itemRepo;
         }
-        
+
 
         // GET: api/Items
         [HttpGet]
-        public async Task<IEnumerable<ItemViewModel>> Get()
+        public async Task<IActionResult> GetAction()
         {
+            // throw new Exception("Exception while fetching all t");
+
             var items = await _itemRepo.GetAll();
-            return  _mapper.Map<ItemViewModel[]>(items);
+            if (items != null)
+                return Ok(items);
+            else
+                return NotFound(new ApiError(404, "Items are not found"));
         }
 
         // GET: api/Items/5
         [HttpGet("{id}", Name = "Get")]
-        public async Task<ItemViewModel> ItemsGet(Guid id)
+        public async Task<IActionResult> ItemsGet(Guid id)
         {
-            var item= await _itemRepo.GetById(id);
-            return _mapper.Map<ItemViewModel>(item);
-        }
-
-        // POST: api/Items
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT: api/Items/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            var item = await _itemRepo.GetById(id);
+            if (item != null)
+                return Ok(_mapper.Map<ItemViewModel>(item));
+            else
+                return NotFound(new ApiError(404,"Item is not found")); 
         }
     }
 }
