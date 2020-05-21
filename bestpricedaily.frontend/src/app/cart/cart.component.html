@@ -8,7 +8,7 @@
 -->
 
 <!-- <div *ngIf="!paidFor"> -->
-<h1>{{greeting}}</h1> 
+<h1>{{greeting}}</h1>
 <ng-container *ngIf="(cartItems$|async)?.length then showCart ;else showEmptyCart"></ng-container>
 <ng-template #showCart>
     <div fxLayout="row" fxLayout.xs="column" *ngIf="cartItems$|async as items">
@@ -87,10 +87,10 @@
 
 <ng-template #showEmptyCart>
     <!-- <div class="shadow" style="text-align: center;margin-top:40px; width:51%"> -->
-    <div class="shadow" fxLayout="column" style="min-width: 350px;max-width: 350px; margin:auto">
+    <div class="shadow" fxLayout="column" style="min-width: 350px;max-width: 350px; margin:auto;height:120px;">
         <div class="cartheader">Your shopping cart is empty</div>
         <hr style="width:90%">
-        <button mat-raised-button routerLink="/items" class="cartbutton">
+        <button color="primary" mat-raised-button routerLink="/items" class="cartbutton">
             Back to Shopping
         </button>
         <!-- <button [disabled]="!(getCartCount$|async)?.length" mat-raised-button routerLink="/checkout" class="cartbutton">
