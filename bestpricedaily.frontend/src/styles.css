@@ -8,8 +8,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   }
   .item {
     margin: 10px;
-    width: 330px;
-    max-width: 330;
+    width: 230px;
+    max-width: 230;
   }
   .itemdesc {
     margin-left: 10px;
@@ -30,6 +30,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     margin-left: 20px;
     font-weight: bold;
   }
-  
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

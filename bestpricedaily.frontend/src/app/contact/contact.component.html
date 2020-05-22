@@ -25,7 +25,7 @@
                     matAutosizeMaxRows="10" formControlName="description"></textarea>
                 <mat-error
                     *ngIf="!formGroup.controls['description'].valid && formGroup.controls['description'].touched">
-                    Required field, must be between 5 and 10 characters.
+                    Required field, must be at least 50 characters
                 </mat-error>
             </mat-form-field>
 

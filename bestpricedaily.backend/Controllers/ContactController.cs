@@ -61,12 +61,12 @@ namespace bestpricedaily.Controllers
                 // client.EnableSsl = true;
 
                 // client.Credentials = new System.Net.NetworkCredential("yourusername", "yourpassword");
-                _logger.LogInformation("contact from: " + contact.email);
-                _logger.LogInformation("contact name: " + contact.name);
+                _logger.LogDebug("contact from: " + contact.email);
+                _logger.LogDebug("contact name: " + contact.name);
                 var mailMessage = new System.Net.Mail.MailMessage();
                 mailMessage.From = new System.Net.Mail.MailAddress(contact.email);
 
-                _logger.LogInformation("pass mail message from");
+                _logger.LogDebug("pass mail message from");
                 mailMessage.To.Add("contact@bestpricedaily.net");
 
                 // if (!string.IsNullOrEmpty(email.Cc))
@@ -81,7 +81,7 @@ namespace bestpricedaily.Controllers
                 mailMessage.BodyEncoding = System.Text.Encoding.UTF8;
                 mailMessage.SubjectEncoding = System.Text.Encoding.UTF8;
 
-                _logger.LogInformation("About to send");
+                _logger.LogDebug("About to send");
                 await client.SendMailAsync(mailMessage);
             }
             catch (Exception ex)

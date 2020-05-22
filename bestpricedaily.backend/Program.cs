@@ -28,11 +28,18 @@ namespace bestpricedaily.backend
             
 
             LogManager.Configuration = new NLogLoggingConfiguration(config.GetSection("NLog"));
+            // NLog.LogManager.Configuration = new NLogLoggingConfiguration(config.GetSection("NLog"));
 
             var logger = NLog.Web.NLogBuilder.ConfigureNLog(LogManager.Configuration).GetCurrentClassLogger();
+            // NLog.LogManager.ThrowExceptions = true; 
             try
             {
-                logger.Debug("init main");
+                // logger.Trace("init trace");
+                logger.Debug("init deb");
+                // logger.Info("init info");
+                // logger.Warn("init warn");
+                // logger.Error("init error");
+                // logger.Fatal("init fatal");
                 CreateHostBuilder(args).Build().Run();
             }
             catch (Exception exception)

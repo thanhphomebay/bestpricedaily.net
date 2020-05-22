@@ -30,12 +30,15 @@ export class ItemsListComponent implements OnInit {
   }
 
   addItem(item: Item) {
-    console.log(item);
     this.store.dispatch(AddItemToCart({ item }));
   }
   delItem(item: CartItem) {
     this.store.dispatch(RemoveItemFromCart({ item }));
   }
+  addToFavorite(item: Item) {
+    // this.store.dispatch(AddItemToCart({ item }));
+  }
+
 
   // list: Item[] = [
   //   { idx: 0, uuid: uuidv4(), price: 4, name: 'doll', desc: 'baby doll', pix: `https://api.adorable.io/avatars/100/${~~(Math.random() * 100)}` },

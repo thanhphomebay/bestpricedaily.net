@@ -1,6 +1,7 @@
 import { on, createAction, props, ActionReducerMap, createReducer, createFeatureSelector, createSelector, ActionReducer, MetaReducer } from "@ngrx/store";
 import { CartState, cartReducer } from "./cart/cart.store";
 import { localStorageSync } from 'ngrx-store-localstorage';
+import { FavoriteState, favoriteReducer } from './items/item.store';
 
 export const AddLoading = createAction('[loading] add', props<{ id: string }>());
 export const RemoveLoading = createAction('[loading] remove', props<{ id: string }>());
@@ -10,6 +11,7 @@ export interface LoadingState {
 }
 
 export interface AppState {
+    favorite: FavoriteState,
     cart: CartState,
     loadings: LoadingState
 }
@@ -21,6 +23,7 @@ const loadingReducer = createReducer(
 );
 
 export const appReducers: ActionReducerMap<AppState> = {
+    favorite: favoriteReducer,
     cart: cartReducer,
     loadings: loadingReducer
 }

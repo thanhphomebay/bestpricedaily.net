@@ -28,7 +28,7 @@ export class ContactComponent implements OnInit {
     this.formGroup = this.formBuilder.group({
       'email': [null, [Validators.required, Validators.pattern(emailregex)], this.checkInUseEmail],
       'name': [null, Validators.required],
-      'description': [null, [Validators.required, Validators.minLength(5), Validators.maxLength(1000)]],
+      'description': [null, [Validators.required, Validators.minLength(50), Validators.maxLength(1000)]],
       'validate': ''
     });
   }

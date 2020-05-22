@@ -18,6 +18,7 @@ export const cartCaptureOrderStatusRequest = createAction('[cart] capture order 
 export const cartCaptureOrderStatusRequestSuccess = createAction('[cart] capture order request success', props<{ orderid: string }>());
 export const cartCaptureOrderStatusRequestFailure = createAction('[cart] capture order request failure', props<{ errMsg: any }>());
 
+
 //Reducer
 export interface CartState {
   orderId: string,

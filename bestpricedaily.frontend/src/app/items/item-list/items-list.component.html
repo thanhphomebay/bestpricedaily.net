@@ -1,4 +1,4 @@
-<!-- 
+<!--
 <div fxLayout="row wrap" fxLayoutGap="25px" >
     <ng-container *ngFor="let item of items|async">
         <mat-card>
@@ -32,7 +32,10 @@
                 <hr style="width:90%;">
                 <div fxLayout="row" fxLayoutAlign="space-between center">
                     <div class="itemprice">{{item.price | currency}}</div>
-                    <button mat-button matTooltip="Add the item" color="primary" (click)="addItem(item)">
+                    <!-- <button mat-button matTooltip="Add to favorite" (click)="addToFavorite(item)">
+                        <mat-icon>favorite</mat-icon>
+                    </button> -->
+                    <button mat-button matTooltip="Add to cart" (click)="addItem(item)">
                         <mat-icon>add_shopping_cart</mat-icon>
                     </button>
                 </div>
