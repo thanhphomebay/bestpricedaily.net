@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Core.Repository;
 using bestpricedaily.Models;
 using bestpricedaily.ViewModels;
+using Core.ApiErrors;
 namespace bestpricedaily.Controllers
 {
     [Route("api/[controller]")]
@@ -19,22 +20,15 @@ namespace bestpricedaily.Controllers
         {
             _orderRepo = orderRepo;
         }
-
-
         // GET: api/Orders/5
         [HttpGet("{orderid}", Name = "captureorderstatus")]
-        public async Task<CaptureOrderStatusView> CaptureOrderStatus(string orderid)
+        public async Task<IActionResult> CaptureOrderStatus(string orderid)
         {
             var order = await _orderRepo.FirstOrDefaultAsync(x => x.order_id == orderid);
-            // return new ContentResult
-            // {
-            //     ContentType = "html/text",
-            //     StatusCode = (int)HttpStatusCode.OK,
-            //     Content =   order.order_id 
-            // };
-            return new CaptureOrderStatusView{ order_id = order.order_id.ToString() };
+            if (order != null)
+                return Ok(new CaptureOrderStatusView { order_id = order.order_id.ToString() });
+            else
+                return NotFound(new ApiError(404, "capture order not found"));
         }
-
     }
-
 }

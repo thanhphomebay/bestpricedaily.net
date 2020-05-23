@@ -24,6 +24,7 @@ namespace bestpricedaily.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
+            throw new System.Exception("crashing intentionally");
             var orders = await _orderRepo.GetAll();
             if (orders != null)
                 return Ok(orders);

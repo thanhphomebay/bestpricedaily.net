@@ -43,18 +43,18 @@ export class CartEffects {
         ofType(cartCaptureOrderStatusRequest),
         withLatestFrom(this.store.select(getCartOrderId)),
         mergeMap((orderId) => {
-          if(orderId[1]){
-          return this.cartService.getOrderStatus(orderId[1])
-            .pipe(
-              map((resp: any) => { return cartCaptureOrderStatusRequestSuccess({ orderid: resp.order_id })}),
-              catchError(error =>{ return of(cartCaptureOrderStatusRequestFailure({ errMsg: error }))})
-            )
+          if (orderId[1]) {
+            return this.cartService.getOrderStatus(orderId[1])
+              .pipe(
+                map((resp: any) => { return cartCaptureOrderStatusRequestSuccess({ orderid: resp.order_id }) }),
+                catchError(error => { return of(cartCaptureOrderStatusRequestFailure({ errMsg: error })) })
+              )
           }
           return EMPTY;//cart not yet checked out with paypal
         })
       )
   });
- 
+
 
   constructor(
     private actions$: Actions,

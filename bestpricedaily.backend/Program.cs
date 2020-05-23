@@ -16,10 +16,6 @@ namespace bestpricedaily.backend
     {
         public static void Main(string[] args)
         {
-            // var env = hostingContext.HostingEnvironment;
-            // var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-            // var isDevelopment = environment == Environments.Development;
-
             var config = new ConfigurationBuilder()
                 .SetBasePath(System.IO.Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
@@ -28,10 +24,7 @@ namespace bestpricedaily.backend
             
 
             LogManager.Configuration = new NLogLoggingConfiguration(config.GetSection("NLog"));
-            // NLog.LogManager.Configuration = new NLogLoggingConfiguration(config.GetSection("NLog"));
-
             var logger = NLog.Web.NLogBuilder.ConfigureNLog(LogManager.Configuration).GetCurrentClassLogger();
-            // NLog.LogManager.ThrowExceptions = true; 
             try
             {
                 // logger.Trace("init trace");
@@ -44,7 +37,6 @@ namespace bestpricedaily.backend
             }
             catch (Exception exception)
             {
-                //NLog: catch setup errors
                 logger.Error(exception, "Stopped program because of exception");
                 throw;
             }
